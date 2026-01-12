@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card">
+  <div class="card-body">
+    <div class="d-flex justify-content-between">
+      <h3 class="card-title">{{ course.title }}</h3>
+      <span class="badge bg-secondary">الزيارات: {{ visits_count }}</span>
+    </div>
+    <p class="text-muted mb-2">التصنيف: {{ course.category }}</p>
+    <p class="card-text">{{ course.description }}</p>
+
+    {% if course.file_url %}
+      {% set ext = course.file_url.split('.')[-1]|lower %}
+      {% if ext in ['mp4','mov','mkv','webm'] %}
+        <video class="w-100" controls>
+          <source src="{{ url_for('uploaded_file', filename=course.file_url) }}" type="video/{{ ext }}">
+          متصفحك لا يدعم تشغيل الفيديو.
+        </video>
+      {% elif ext == 'pdf' %}
+        <a class="btn btn-outline-primary" href="{{ url_for('uploaded_file', filename=course.file_url) }}" target="_blank">فتح الملف PDF</a>
+      {% else %}
+        <a class="btn btn-outline-secondary" href="{{ url_for('uploaded_file', filename=course.file_url) }}" target="_blank">تحميل الملف</a>
+      {% endif %}
+    {% else %}
+      <p class="text-muted">لا يوجد ملف مرفق لهذا الكورس.</p>
+    {% endif %}
+
+    <hr>
+    <h6>آخر الزيارات</h6>
+    <ul class="list-group">
+      {% for v in latest_visits %}
+        <li class="list-group-item d-flex justify-content-between">
+          <span>{{ v.user_id and 'مستخدم #' ~ v.user_id or 'زائر' }}</span>
+          <small class="text-muted">{{ v.timestamp.strftime("%Y-%m-%d %H:%M") }}</small>
+        </li>
+      {% endfor %}
+    </ul>
+
+    <a class="btn btn-secondary mt-3" href="{{ url_for('index') }}">رجوع</a>
+  </div>
+</div>
+{% endblock %}
