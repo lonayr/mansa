@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container" style="max-width: 600px;">
+  <h2 class="text-center mb-4">📝 إنشاء حساب جديد</h2>
+  <form method="post" class="card p-4 shadow-sm">
+    {{ form.hidden_tag() }}
+    <div class="mb-3">
+      <label class="form-label">👤 الاسم الكامل</label>
+      {{ form.name(class="form-control", placeholder="اكتب اسمك") }}
+    </div>
+    <div class="mb-3">
+      <label class="form-label">📧 البريد الإلكتروني</label>
+      {{ form.email(class="form-control", placeholder="example@mail.com") }}
+    </div>
+    <div class="mb-3">
+      <label class="form-label">🔒 كلمة المرور</label>
+      {{ form.password(class="form-control", placeholder="••••••••") }}
+    </div>
+    <div class="mb-3">
+      <label class="form-label">📂 التصنيف</label>
+      {{ form.category(class="form-select") }}
+    </div>
+    <button type="submit" class="btn btn-success w-100">إنشاء الحساب</button>
+  </form>
+  <div class="text-center mt-3">
+    <p>لديك حساب بالفعل؟ <a href="{{ url_for('login') }}">تسجيل الدخول</a></p>
+  </div>
+</div>
+{% endblock %}
