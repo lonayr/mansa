@@ -15,3 +15,6 @@ class Config:
 
     COURSE_ALLOWED_EXTENSIONS = {"mp4", "mov", "mkv", "webm", "pdf"}
     IMAGE_ALLOWED_EXTENSIONS = {"png", "jpg", "jpeg", "gif"}
+
+for folder in [Config.UPLOAD_FOLDER, Config.PROFILE_UPLOAD_FOLDER, Config.SETTINGS_FOLDER]:
+    os.makedirs(folder, exist_ok=True)
