@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container" style="max-width: 800px;">
+  <h2 class="mb-4">إعدادات المطور</h2>
+  <form method="post" enctype="multipart/form-data" class="card p-4 shadow-sm">
+    {{ form.hidden_tag() }}
+    <div class="mb-3">
+      <label class="form-label">اسم المنصة</label>
+      {{ form.platform_name(class="form-control", placeholder="اسم يظهر في الأعلى") }}
+    </div>
+    <div class="mb-3">
+      <label class="form-label">وصف المنصة</label>
+      {{ form.platform_description(class="form-control", rows="3", placeholder="وصف مختصر يظهر في الصفحة الرئيسية") }}
+    </div>
+    <div class="mb-3">
+      <label class="form-label">بريد الدعم</label>
+      {{ form.support_email(class="form-control", placeholder="support@example.com") }}
+    </div>
+    <div class="mb-3">
+      <label class="form-label">شعار المنصة</label>
+      {{ form.logo(class="form-control") }}
+      {% if settings.logo_filename %}
+        <div class="mt-2">
+          <img src="{{ url_for('settings_file', filename=settings.logo_filename) }}" alt="logo" style="max-height:64px;">
+        </div>
+      {% endif %}
+    </div>
+    <button type="submit" class="btn btn-primary">حفظ الإعدادات</button>
+  </form>
+</div>
+{% endblock %}
