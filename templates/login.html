@@ -1,21 +1,14 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="container" style="max-width: 500px;">
-  <h2 class="text-center mb-4">🔑 تسجيل الدخول</h2>
-  <form method="post" class="card p-4 shadow-sm">
-    {{ form.hidden_tag() }}
-    <div class="mb-3">
-      <label class="form-label">📧 البريد الإلكتروني</label>
-      {{ form.email(class="form-control", placeholder="example@mail.com") }}
-    </div>
-    <div class="mb-3">
-      <label class="form-label">🔒 كلمة المرور</label>
-      {{ form.password(class="form-control", placeholder="••••••••") }}
-    </div>
-    <button type="submit" class="btn btn-primary w-100">تسجيل الدخول</button>
-  </form>
-  <div class="text-center mt-3">
-    <p>ليس لديك حساب؟ <a href="{{ url_for('register') }}">إنشاء حساب جديد</a></p>
+<h3>تسجيل الدخول</h3>
+<form method="POST">
+  {{ form.hidden_tag() }}
+  <div class="mb-3">
+    {{ form.email.label }} {{ form.email(class="form-control") }}
   </div>
-</div>
+  <div class="mb-3">
+    {{ form.password.label }} {{ form.password(class="form-control") }}
+  </div>
+  {{ form.submit(class="btn btn-primary") }}
+</form>
 {% endblock %}
