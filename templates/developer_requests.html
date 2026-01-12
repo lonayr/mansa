@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+<h3>طلبات تفعيل المديرين</h3>
+{% if pending_admins %}
+  <ul class="list-group">
+    {% for u in pending_admins %}
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        <span>{{ u.name }} - {{ u.email }}</span>
+        <div>
+          <a href="{{ url_for('developer_approve', user_id=u.id) }}" class="btn btn-success btn-sm">قبول</a>
+          <a href="{{ url_for('developer_reject', user_id=u.id) }}" class="btn btn-danger btn-sm">رفض</a>
+        </div>
+      </li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <div class="alert alert-info">لا توجد طلبات حالياً.</div>
+{% endif %}
+{% endblock %}
