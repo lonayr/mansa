@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container" style="max-width: 700px;">
+  <h2 class="text-center mb-4">📤 رفع ملف للكورس: {{ course.title }}</h2>
+  <form method="post" enctype="multipart/form-data" class="card p-4 shadow-sm">
+    {{ form.hidden_tag() }}
+    <div class="mb-3">
+      <label class="form-label">اختر ملف الفيديو أو PDF</label>
+      {{ form.file(class="form-control") }}
+    </div>
+    <button type="submit" class="btn btn-success w-100">رفع الملف</button>
+  </form>
+
+  {% if course.file_url %}
+    <div class="alert alert-info mt-3">
+      يوجد ملف مرفوع بالفعل: <a href="{{ url_for('uploaded_file', filename=course.file_url) }}" target="_blank">{{ course.file_url }}</a>
+    </div>
+  {% endif %}
+</div>
+{% endblock %}
