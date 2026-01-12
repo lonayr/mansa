@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container" style="max-width: 700px;">
+  <h2 class="text-center mb-4">➕ إضافة كورس جديد</h2>
+  <form method="post" class="card p-4 shadow-sm">
+    {{ form.hidden_tag() }}
+    <div class="mb-3">
+      <label class="form-label">عنوان الكورس</label>
+      {{ form.title(class="form-control", placeholder="اكتب عنوانًا واضحًا") }}
+    </div>
+    <div class="mb-3">
+      <label class="form-label">وصف الكورس</label>
+      {{ form.description(class="form-control", rows="4", placeholder="صف بوضوح محتوى الكورس") }}
+    </div>
+    <div class="mb-3">
+      <label class="form-label">التصنيف</label>
+      {{ form.category(class="form-control", placeholder="مثل: برمجة، رياضيات") }}
+    </div>
+    <button type="submit" class="btn btn-primary w-100">إضافة</button>
+  </form>
+</div>
+{% endblock %}
