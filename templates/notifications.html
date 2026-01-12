@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+<h3>الإشعارات</h3>
+{% if notifications %}
+  <ul class="list-group">
+    {% for n in notifications %}
+      <li class="list-group-item d-flex justify-content-between">
+        <div>
+          <small class="text-muted">{{ n.created_at.strftime('%Y-%m-%d %H:%M') }}</small><br>
+          {{ n.message }}
+        </div>
+        <div>
+          {% if not n.is_read %}
+            <a class="btn btn-sm btn-outline-primary" href="{{ url_for('mark_notification_read', notif_id=n.id) }}">تعليم كمقروء</a>
+          {% else %}
+            <span class="badge bg-success">مقروء</span>
+          {% endif %}
+        </div>
+      </li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <div class="alert alert-info">لا توجد إشعارات حالياً.</div>
+{% endif %}
+{% endblock %}
